@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot name="joinedrobot" xmlns:xacro="http://wiki.ros.org/xacro">
+	
+	  <!-- Dummy Link -->
+	  <link name="link0" />
+	  <joint name="world_joint" type="fixed">
+	    <parent link="world" />
+	    <child link="link0" />
+	    <origin xyz="0 0 0" rpy="0 0 0"/>
+	    <axis xyz="0 0 1"/>
+	  </joint>
+
+
+	<!-- include xacro file containing a link where you want to attach the manipulator -->
+	<xacro:include filename="$(find summit_xl_description)/robots/summit_xls_std.urdf.xacro"/>
+	<xacro:include filename="$(find franka_description)/robots/panda_arm_hand.urdf.xacro"/>
+	<!-- include xacro file where there first link is called manipulator_base_link -->
+	
+	 <joint name="link0_joint1" type="fixed">
+	    <parent link="link0" />
+	    <child link="summit_xl_base_footprint" />
+	    <origin xyz="0 -1 0" rpy="0 0 0"/>
+	  </joint>
+
+
+	<!-- you can specify xyz offset to locate the manipulator -->
+	<joint name='jointhem_fixed_joint' type='fixed'>
+		
+		<origin xyz="0.2 0 0" rpy="0 0 0" />
+		<parent link='summit_xl_base_link' />
+		<child link='panda_link0'/>
+	</joint> 
+
+	
+	
+ 
+</robot>
